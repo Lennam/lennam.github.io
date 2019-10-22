@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Nam">
+<meta name="description" content="Nam&#39;s blog">
+<meta name="generator" content="Hugo 0.59.0" />
+<title>This指向</title>
+<link rel="shortcut icon" href="https://example.org/images/favicon.ico">
+<link rel="stylesheet" href="https://example.org/css/style.css">
+<link rel="stylesheet" href="https://example.org/css/highlight.css">
+
+
+
+<link rel="stylesheet" href="https://example.org/css/monosocialiconsfont.css">
+
+
+
+<link href="https://example.org/index.xml" rel="alternate" type="application/rss+xml" title="Nam&#39;s" />
+
+
+<meta property="og:title" content="This指向" />
+<meta property="og:description" content="刚学JS时，总是对this的指向摸不着头脑，所以对它的使用，总是小心翼翼，能避就避，但在一些场景中，不使用this，会让代码变得丑陋。比如：
+function sayHi() { return &#39;Hello, I&#39;m &#39; &#43; this.name; } const me = { name: &#39;Nam&#39; } sayHi.call(me); // Hello,I&#39;m Nam // 而当我们不使用this时，必须要显示的传入一个上下文对象 function sayHi(obj) { return &#39;Hello, I&#39;m &#39; &#43; obj.name; } const me = { name: &#39;Nam&#39; } sayHi(me); // Hello,I&#39;m Nam  显然，this提供了一种更优雅的方式来隐式的传递一个对象。当我们使用的模式越来越复杂，显示的传递上下文对象会让代码变得越来越混乱，使用this就可以很好的解决这个问题。
+this的指向 关于this的指向，总有一个原则：this总是指向调用调用函数的那个对象。
+我们来看具体的栗子：
+1.独立函数调用 var a = 1; function say() { console.log(this.a) } say(); // 1 // 当我们使用严格模式的时候 var a = 1; function say() { ‘use strict&#39;; console." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.org/posts/this%E6%8C%87%E5%90%91/" />
+<meta property="article:published_time" content="2017-10-22T15:15:09+08:00" />
+<meta property="article:modified_time" content="2017-10-22T15:15:09+08:00" />
+
+
+<meta itemprop="name" content="This指向">
+<meta itemprop="description" content="刚学JS时，总是对this的指向摸不着头脑，所以对它的使用，总是小心翼翼，能避就避，但在一些场景中，不使用this，会让代码变得丑陋。比如：
+function sayHi() { return &#39;Hello, I&#39;m &#39; &#43; this.name; } const me = { name: &#39;Nam&#39; } sayHi.call(me); // Hello,I&#39;m Nam // 而当我们不使用this时，必须要显示的传入一个上下文对象 function sayHi(obj) { return &#39;Hello, I&#39;m &#39; &#43; obj.name; } const me = { name: &#39;Nam&#39; } sayHi(me); // Hello,I&#39;m Nam  显然，this提供了一种更优雅的方式来隐式的传递一个对象。当我们使用的模式越来越复杂，显示的传递上下文对象会让代码变得越来越混乱，使用this就可以很好的解决这个问题。
+this的指向 关于this的指向，总有一个原则：this总是指向调用调用函数的那个对象。
+我们来看具体的栗子：
+1.独立函数调用 var a = 1; function say() { console.log(this.a) } say(); // 1 // 当我们使用严格模式的时候 var a = 1; function say() { ‘use strict&#39;; console.">
+
+
+<meta itemprop="datePublished" content="2017-10-22T15:15:09&#43;08:00" />
+<meta itemprop="dateModified" content="2017-10-22T15:15:09&#43;08:00" />
+<meta itemprop="wordCount" content="323">
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="This指向"/>
+<meta name="twitter:description" content="刚学JS时，总是对this的指向摸不着头脑，所以对它的使用，总是小心翼翼，能避就避，但在一些场景中，不使用this，会让代码变得丑陋。比如：
+function sayHi() { return &#39;Hello, I&#39;m &#39; &#43; this.name; } const me = { name: &#39;Nam&#39; } sayHi.call(me); // Hello,I&#39;m Nam // 而当我们不使用this时，必须要显示的传入一个上下文对象 function sayHi(obj) { return &#39;Hello, I&#39;m &#39; &#43; obj.name; } const me = { name: &#39;Nam&#39; } sayHi(me); // Hello,I&#39;m Nam  显然，this提供了一种更优雅的方式来隐式的传递一个对象。当我们使用的模式越来越复杂，显示的传递上下文对象会让代码变得越来越混乱，使用this就可以很好的解决这个问题。
+this的指向 关于this的指向，总有一个原则：this总是指向调用调用函数的那个对象。
+我们来看具体的栗子：
+1.独立函数调用 var a = 1; function say() { console.log(this.a) } say(); // 1 // 当我们使用严格模式的时候 var a = 1; function say() { ‘use strict&#39;; console."/>
+
+
+    </head>
+<body>
+    <nav class="main-nav">
+	
+		<a href='https://example.org/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+
+	
+		<a class="cta" href="https://example.org/index.xml">Subscribe</a>
+	
+</nav>
+
+    <section id="wrapper">
+        
+        
+<article class="post">
+    <header>
+        <h1>This指向</h1>
+        <h2 class="subtitle"></h2>
+        <h2 class="headline">
+        October 22, 2017
+        <br>
+        
+        </h2>
+    </header>
+    <section id="post-body">
+        
+
+<p>刚学JS时，总是对this的指向摸不着头脑，所以对它的使用，总是小心翼翼，能避就避，但在一些场景中，不使用this，会让代码变得丑陋。比如：</p>
+
+<pre><code class="language-javascript">function sayHi() {
+    return 'Hello, I'm ' + this.name;
+}
+const me = {
+    name: 'Nam'
+}
+sayHi.call(me);  //  Hello,I'm Nam
+
+//  而当我们不使用this时，必须要显示的传入一个上下文对象
+
+function sayHi(obj) {
+    return 'Hello, I'm ' + obj.name;
+}
+const me = {
+    name: 'Nam'
+}
+sayHi(me);  //  Hello,I'm Nam
+</code></pre>
+
+<p>显然，this提供了一种更优雅的方式来隐式的传递一个对象。当我们使用的模式越来越复杂，显示的传递上下文对象会让代码变得越来越混乱，使用this就可以很好的解决这个问题。</p>
+
+<h3 id="this的指向">this的指向</h3>
+
+<p>关于this的指向，总有一个原则：this总是指向调用调用函数的那个对象。</p>
+
+<p>我们来看具体的栗子：</p>
+
+<h4 id="1-独立函数调用">1.独立函数调用</h4>
+
+<pre><code class="language-javascript">var a = 1;
+function say() {
+    console.log(this.a)
+}
+say();  // 1
+
+//  当我们使用严格模式的时候
+var a = 1;
+function say() {
+    ‘use strict';
+    console.log(this.a)
+}
+say();  // TypeError: this is undefined
+</code></pre>
+
+<h4 id="2-new函数调用">2.new函数调用</h4>
+
+<pre><code class="language-javascript">function Person(name) {
+     this.name = name;
+}
+var man = new Person('Nam');
+man.name;  // 'Nam'
+</code></pre>
+
+<h4 id="3-call-apply-和bind">3.call(),apply()和bind()</h4>
+
+<pre><code class="language-javascript">//  通过call()在调用say()时强制绑定this到指定对象
+//  这种绑定方法并不是永久的，只在调用时暂时绑定
+//  apply()绑定this的机制和call()一样，他们的区别是在其他参数上
+function say() {
+     console.log(this.name)
+}
+var person = {
+     name: 'Nam'
+}
+say.call(person);  // 'Nam'
+
+//  通过bind()强制绑定
+function someoneDo(something) {
+    return this.name + ' is '  + something;
+}
+var person = {
+    name: 'Nam'
+}
+var namDo = someoneDo.bind(person);
+console.log(namDo('flying'));  // 'Nam is flying'
+</code></pre>
+
+<h4 id="4-上下文对象函数调用">4.上下文对象函数调用</h4>
+
+<pre><code class="language-javascript">function say() {
+  console.log(this.name);
+}
+var person = {
+  name: 'Nam',
+  say: say
+}
+person.say();  // 'Nam'
+</code></pre>
+
+<p>当一个对象引用另一个对象时：</p>
+
+<pre><code class="language-javascript">function say() {
+  console.log(this.name);
+}
+var person = {
+  name: 'Nam',
+  say: say
+}
+var anotherPerson = {
+  name: 'Leenam',
+  person: person
+}
+anotherPerson.person.say();  // 'Nam'
+
+// 显然只有对象引用的最后一层会影响调用位置
+</code></pre>
+
+<p>这里有一个丢失this绑定的问题：</p>
+
+<pre><code class="language-javascript">function say() {
+  console.log(this.name);
+}
+var person = {
+  name: 'Nam',
+  say: say
+}
+var anotherSay = person.say;
+var name = 'window';
+anotherSay();  // window
+</code></pre>
+
+<p>可以看到，这里anotherSay的this绑定到了全局对象。因为anotherSay对person.say的引用，实际上是对say本身的引用，因此anotherSay本身是一个独立函数调用，因此this绑定到了全局对象上。</p>
+
+<p>还有一种问题发生在传入回调函数时：</p>
+
+<pre><code class="language-javascript">function say() {
+  console.log(this.name);
+}
+function doSomething(fn) {
+  fn();
+}
+var person = {
+  name: 'Nam',
+  say: say
+}
+var name = 'window'
+doSomething(person.say)；  // 'window
+</code></pre>
+
+<p>参数传递实际上也是一种隐式赋值，所以结果和上一个栗子一样。</p>
+
+<h3 id="this绑定优先级">this绑定优先级</h3>
+
+<p>我们已经清除上述四种情况中的this绑定，那如果在某种情境下上述四种情况都适用，我们应该已哪种为准呢？</p>
+
+<p>毫无疑问，独立函数调用的优先级是最低的。</p>
+
+<p>call、applay、bind和上下文对象函数调用呢？</p>
+
+<pre><code class="language-javascript">function say() {
+  console.log(this.name);
+}
+var person = {
+  name: 'Nam',
+  say: say
+}
+var anotherPerson = {
+  name: 'Leenam',
+  say: say
+}
+person.say();  // 'Nam'
+person.say.call(anotherPerson);  // 'Leenam'
+
+</code></pre>
+
+<p>显然，call、apply、bind的优先级更高。</p>
+
+<p>现在让我们来对比一下new函数调用和call、apply、bind：</p>
+
+<pre><code class="language-javascript">function person(name) {
+  this.name = name;
+}
+var man1 = {};
+var setName = person.bind(man1);
+setName('Nam');
+console.log(man1.name);  // 'Nam'
+
+var man2 = new setName('Leenam');
+console.log(man1.name);  // 'Nam'
+console.log(man2.name);  // 'Leenam'
+
+</code></pre>
+
+<p>setName被绑定到了man1上，但是new setName并没有把man1的name改为Leenam。很奇怪对不对，关于<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">bind</a>我们可以查看它的pollyfill去了解它是怎么实现的。</p>
+
+<p>最后，我们可以依照下面的顺序来判断this：</p>
+
+<ol>
+<li>函数是否在new中调用？如果是的话，this指向新创建的对象</li>
+<li>是否通过call、apply、bind进行绑定？如果是的话，this指向绑定的对象</li>
+<li>是否在某个上下文对象中调用？如果是的话，this指向上下文对象</li>
+<li>如果以上都不是，非严格模式下this绑定到全局对象，严格模式下绑定到undefined</li>
+</ol>
+
+    </section>
+</article>
+
+<footer id="post-meta" class="clearfix">
+    
+    <img class="avatar" src="https://example.org/images/avatar.png">
+    <div>
+        <span class="dark">Nam</span>
+        <span>在路上</span>
+    </div>
+    
+    <section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fexample.org%2fposts%2fthis%25E6%258C%2587%25E5%2590%2591%2f - This%e6%8c%87%e5%90%91 "><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+    </section>
+</footer>
+
+
+
+<ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+
+    
+    
+    
+        <li>
+            <a href="https://example.org/posts/how-to-use-proxy/">How to use Proxy<aside class="dates">Feb 3 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://example.org/posts/%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/">一道面试题<aside class="dates">Jan 10 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://example.org/posts/js%E9%87%8C%E7%9A%84%E7%BB%A7%E6%89%BF/">Js里的继承<aside class="dates">Jan 2 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://example.org/posts/js%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/">Js的基本类型<aside class="dates">Jan 1 0001</aside></a>
+        </li>
+    
+</ul>
+
+
+
+        <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    
+    <a class="symbol" href="https://Lennam.github.com/">
+        circlegithub
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 Nam
+    
+    </p>
+</footer>
+
+    </section>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://example.org/js/main.js"></script>
+<script src="https://example.org/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+</body>
+</html>

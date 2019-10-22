@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Nam">
+<meta name="description" content="Nam&#39;s blog">
+<meta name="generator" content="Hugo 0.59.0" />
+<title>Js的基本类型</title>
+<link rel="shortcut icon" href="https://example.org/images/favicon.ico">
+<link rel="stylesheet" href="https://example.org/css/style.css">
+<link rel="stylesheet" href="https://example.org/css/highlight.css">
+
+
+
+<link rel="stylesheet" href="https://example.org/css/monosocialiconsfont.css">
+
+
+
+<link href="https://example.org/index.xml" rel="alternate" type="application/rss+xml" title="Nam&#39;s" />
+
+
+<meta property="og:title" content="Js的基本类型" />
+<meta property="og:description" content="Javascript的内置类型总共有7种：
+ Undefined Null String Number Boolean Symbol（ES6新增） Object  其中除了Object为引用类型外，其他都为基本类型。
+我们可以使用 typeof 操作符来检测基本类型：
+typeof undefined === &#39;undefined&#39;; // true typeof &#39;Nam&#39; === &#39;string&#39;; // true typeof 1106 === &#39;number&#39;; // true typeof true === &#39;boolean&#39;; // true typeof Symbol() === &#39;symbol&#39;; // true // 当我们使用typeof操作符对null进行验证的时候 typeof null; // ‘object&#39;, What?  可以看到，我们typeof null返回的是object类型，这是一个特殊情况，正确的返回应该是null，但是这个bug由来已久，在javascript中存在了近20年，如果对它进行修复，会牵扯到太多web系统，将会产生更多的bug，所以这个问题也许永远得不到修复了…
+如果我们想检测null的类型，可以使用复合条件：
+const a = null; (!a &amp;&amp; typeof a === &#39;object); // true  在javascript中，变量是没有类型的，只有值才有。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.org/posts/js%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/" />
+
+
+
+<meta itemprop="name" content="Js的基本类型">
+<meta itemprop="description" content="Javascript的内置类型总共有7种：
+ Undefined Null String Number Boolean Symbol（ES6新增） Object  其中除了Object为引用类型外，其他都为基本类型。
+我们可以使用 typeof 操作符来检测基本类型：
+typeof undefined === &#39;undefined&#39;; // true typeof &#39;Nam&#39; === &#39;string&#39;; // true typeof 1106 === &#39;number&#39;; // true typeof true === &#39;boolean&#39;; // true typeof Symbol() === &#39;symbol&#39;; // true // 当我们使用typeof操作符对null进行验证的时候 typeof null; // ‘object&#39;, What?  可以看到，我们typeof null返回的是object类型，这是一个特殊情况，正确的返回应该是null，但是这个bug由来已久，在javascript中存在了近20年，如果对它进行修复，会牵扯到太多web系统，将会产生更多的bug，所以这个问题也许永远得不到修复了…
+如果我们想检测null的类型，可以使用复合条件：
+const a = null; (!a &amp;&amp; typeof a === &#39;object); // true  在javascript中，变量是没有类型的，只有值才有。">
+
+
+
+<meta itemprop="wordCount" content="282">
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Js的基本类型"/>
+<meta name="twitter:description" content="Javascript的内置类型总共有7种：
+ Undefined Null String Number Boolean Symbol（ES6新增） Object  其中除了Object为引用类型外，其他都为基本类型。
+我们可以使用 typeof 操作符来检测基本类型：
+typeof undefined === &#39;undefined&#39;; // true typeof &#39;Nam&#39; === &#39;string&#39;; // true typeof 1106 === &#39;number&#39;; // true typeof true === &#39;boolean&#39;; // true typeof Symbol() === &#39;symbol&#39;; // true // 当我们使用typeof操作符对null进行验证的时候 typeof null; // ‘object&#39;, What?  可以看到，我们typeof null返回的是object类型，这是一个特殊情况，正确的返回应该是null，但是这个bug由来已久，在javascript中存在了近20年，如果对它进行修复，会牵扯到太多web系统，将会产生更多的bug，所以这个问题也许永远得不到修复了…
+如果我们想检测null的类型，可以使用复合条件：
+const a = null; (!a &amp;&amp; typeof a === &#39;object); // true  在javascript中，变量是没有类型的，只有值才有。"/>
+
+
+    </head>
+<body>
+    <nav class="main-nav">
+	
+		<a href='https://example.org/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+
+	
+		<a class="cta" href="https://example.org/index.xml">Subscribe</a>
+	
+</nav>
+
+    <section id="wrapper">
+        
+        
+<article class="post">
+    <header>
+        <h1>Js的基本类型</h1>
+        <h2 class="subtitle"></h2>
+        <h2 class="headline">
+        January 1, 0001
+        <br>
+        
+        </h2>
+    </header>
+    <section id="post-body">
+        
+
+<p>Javascript的内置类型总共有7种：</p>
+
+<ul>
+<li>Undefined</li>
+<li>Null</li>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>Symbol（ES6新增）</li>
+<li>Object</li>
+</ul>
+
+<p>其中除了Object为引用类型外，其他都为基本类型。</p>
+
+<p>我们可以使用 <strong><em>typeof</em></strong> 操作符来检测基本类型：</p>
+
+<pre><code class="language-javascript">typeof undefined === 'undefined';  // true
+typeof 'Nam' === 'string';  // true
+typeof 1106 === 'number';  // true
+typeof true === 'boolean';  //  true
+typeof Symbol() === 'symbol'; // true
+
+//  当我们使用typeof操作符对null进行验证的时候
+typeof null; // ‘object',  What?
+</code></pre>
+
+<p>可以看到，我们typeof null返回的是object类型，这是一个特殊情况，正确的返回应该是null，但是这个bug由来已久，在javascript中存在了近20年，如果对它进行修复，会牵扯到太多web系统，将会产生更多的bug，所以这个问题也许永远得不到修复了…</p>
+
+<p>如果我们想检测null的类型，可以使用复合条件：</p>
+
+<pre><code class="language-javascript">const a = null;
+(!a &amp;&amp; typeof a === 'object);  // true
+</code></pre>
+
+<p>在javascript中，变量是没有类型的，只有值才有。</p>
+
+<p>当使用typeof对变量进行检测的时候，检测的是变量持有的值：</p>
+
+<pre><code class="language-javascript">let a = 1106;
+typeof a;  // 'number'
+
+a = 'Nam';
+typeof a;  // 'string'
+</code></pre>
+
+<h3 id="undefined">Undefined</h3>
+
+<p>Undefiend类型只有一个值，即为undefined。</p>
+
+<p>当我们声明一个变量，但未赋值时，它的值便是undefined：</p>
+
+<pre><code class="language-javascript">let a;
+typeof a;  // 'undefined'
+</code></pre>
+
+<p>Undefined类型的类型转换：</p>
+
+<pre><code class="language-javascript">Boolean(undefined);  // false
+Number(undefined);  // NaN
+String(undefined);  // 'undefined'
+</code></pre>
+
+<h3 id="null">Null</h3>
+
+<p>Null类型也只有一个值null，从逻辑上看，它表示一个空对象的指针，如果定义的变量将来用于保存对象，可以将该变量初始化为null。</p>
+
+<p>Null类型的类型转换：</p>
+
+<pre><code class="language-javascript">Boolean(null);  // false
+Number(null);  // 0
+String(null);  // 'null'
+</code></pre>
+
+<h3 id="string">String</h3>
+
+<p>在Javascript中的String类型的值是不可变的，不可变指的是字符串的成员函数不会改变其原始值，而是创建并返回一个新的字符串：</p>
+
+<pre><code class="language-javascript">let a = 'nam';
+b = a.toUpperCase();
+a === b;  // false
+a;  // 'nam'
+b;  // 'NAM'
+</code></pre>
+
+<p>因为String类型的值不可变，我们可以借用数组的非变更方法来处理字符串：</p>
+
+<pre><code class="language-javascript">const c = Array.prototype.join.call(a, '@');
+c;  // 'n@a@m'
+</code></pre>
+
+<p>String类型的类型转换：</p>
+
+<pre><code class="language-javascript">//  当字符串中含有非数字时，String类型转换为Number类型会得到NaN
+//  空字符串会得到0
+Number('nam');  // NaN
+Number('nam1106');  // NaN
+Number('1106');  // 1106
+Number('');  // 0
+
+Boolean('');  // false
+Boolean('nam');  // true
+
+</code></pre>
+
+<h3 id="number">Number</h3>
+
+<p>Number类型是基于<a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">IEEE754</a>标准来实现的，该标准通常也被称为“浮点数”，Javascript使用的是64位二进制格式(二进制浮点数)。所以Javascript没有真正意义上的整数.</p>
+
+<p>特别大和特别小的数字默认用指数格式显示，与toExponential()方法的输出结果相同：</p>
+
+<pre><code class="language-javascript">const a =6E10;
+a;  // 60000000000
+a.toExponential();  // '6e+10'
+
+const b = a * a; //
+b;  //  3.6e + 21
+
+</code></pre>
+
+<p>二进制浮点数有一个最大的问题：</p>
+
+<pre><code class="language-javascript">0.1 + 0.2 === 0.3； // false
+
+</code></pre>
+
+<p>因为二进制浮点数中的0.1和0.2并不是十分精确，它们相加的结果并非刚好等于0.3，所以会返回false。</p>
+
+<p>如果我们要判进行类似0.1 + 0.2是否与0.3相等的判断，我们可以设置一个误差范围，从ES6开始，这个范围定义在Number.EPSILON中：</p>
+
+<pre><code class="language-javascript">const a = 0.1 + 0.2；
+const b = 0.3;
+Math.abs(a -b) &lt; Number.EPSILON;  // true
+
+</code></pre>
+
+<p>要检测一个值事否是整数，可以使用ES6中的Number.isInteger()方法：</p>
+
+<pre><code class="language-javascript">Number.isInteger(1106);  // true
+Number.isInteger(1106.000);  // true
+Number.isInteger(11.06);  // false
+
+</code></pre>
+
+<p>Number类型中有一个特殊的值NaN，它与任何值都不想等，包括它自己，任何涉及到NaN的操作都会返回NaN。</p>
+
+<p>使用isNaN（）方法可以检测一个值是不是NaN。</p>
+
+<p>Number类型的类型转换：</p>
+
+<pre><code class="language-javascript">String(1106);  // '1106'
+String(NaN);  // 'NaN'
+Boolean(1106):  // true
+Boolean(0);  // false
+</code></pre>
+
+<h3 id="boolean">Boolean</h3>
+
+<p>Boolean类型只有两个值：true和false</p>
+
+<p>往Boolean（）方法中传入空数组或者空对象时也会返回true</p>
+
+<h3 id="symbol">Symbol</h3>
+
+<p>ES6新引入了一种新的基本类型Symbol，它表示独一无二的值。</p>
+
+<p>Symbol值通过Symbol（）方法生成：</p>
+
+<pre><code class="language-javascript">let a = Symbol();
+typeof a;  // 'symbol'
+</code></pre>
+
+<p>Symbol（）方法接受一个字符串作为参数，该字符串只是表示对当前Symbol的描述，因此相同参数的Symbol（）返回值并不相等：</p>
+
+<pre><code class="language-javascript">let a = Symbol();
+let b = Symbol()
+a === b;  // false
+
+let c = Symbol('Nam');
+let d = Symbol('Nam');
+c === d;  // false
+</code></pre>
+
+    </section>
+</article>
+
+<footer id="post-meta" class="clearfix">
+    
+    <img class="avatar" src="https://example.org/images/avatar.png">
+    <div>
+        <span class="dark">Nam</span>
+        <span>在路上</span>
+    </div>
+    
+    <section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fexample.org%2fposts%2fjs%25E7%259A%2584%25E5%259F%25BA%25E6%259C%25AC%25E7%25B1%25BB%25E5%259E%258B%2f - Js%e7%9a%84%e5%9f%ba%e6%9c%ac%e7%b1%bb%e5%9e%8b "><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+    </section>
+</footer>
+
+
+
+<ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+
+    
+    
+    
+        <li>
+            <a href="https://example.org/posts/how-to-use-proxy/">How to use Proxy<aside class="dates">Feb 3 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://example.org/posts/%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/">一道面试题<aside class="dates">Jan 10 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://example.org/posts/js%E9%87%8C%E7%9A%84%E7%BB%A7%E6%89%BF/">Js里的继承<aside class="dates">Jan 2 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://example.org/posts/this%E6%8C%87%E5%90%91/">This指向<aside class="dates">Oct 22 2017</aside></a>
+        </li>
+    
+</ul>
+
+
+
+        <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    
+    <a class="symbol" href="https://Lennam.github.com/">
+        circlegithub
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 Nam
+    
+    </p>
+</footer>
+
+    </section>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://example.org/js/main.js"></script>
+<script src="https://example.org/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+</body>
+</html>
