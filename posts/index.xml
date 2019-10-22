@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Nam&#39;s</title>
-    <link>https://example.org/posts/</link>
+    <link>https://www.nams.site/posts/</link>
     <description>Recent content in Posts on Nam&#39;s</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 03 Feb 2018 14:31:29 +0800</lastBuildDate>
     
-	<atom:link href="https://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.nams.site/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>How to use Proxy</title>
-      <link>https://example.org/posts/how-to-use-proxy/</link>
+      <link>https://www.nams.site/posts/how-to-use-proxy/</link>
       <pubDate>Sat, 03 Feb 2018 14:31:29 +0800</pubDate>
       
-      <guid>https://example.org/posts/how-to-use-proxy/</guid>
+      <guid>https://www.nams.site/posts/how-to-use-proxy/</guid>
       <description>今天看到一篇关于Proxy的文章，挺有意思，所以翻译一下。
 原文地址：How to use JavaScript Proxies for Fun and Profit
 以下是翻译：
@@ -33,10 +33,10 @@ Reading property &amp;quot;message&amp;quot; hello world  在这个例子中，�
     
     <item>
       <title>一道面试题</title>
-      <link>https://example.org/posts/%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+      <link>https://www.nams.site/posts/%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
       <pubDate>Wed, 10 Jan 2018 22:15:22 +0800</pubDate>
       
-      <guid>https://example.org/posts/%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+      <guid>https://www.nams.site/posts/%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
       <description>今天在知乎上看到一道JavaScript面试题:
 var x = 20; var a = { x : 15, fn : function(){ var x = 30; return function(){ return this.x; }; } }; console.log(a.fn()); console.log((a.fn())()); console.log(a.fn()()); console.log(a.fn()() == (a.fn())()); console.log(a.fn().call(this)); console.log(a.fn().call(a));  第一个console.log输出:
 function (){ return this.x; }  第二个console.log输出:
@@ -49,10 +49,10 @@ function (){ return this.x;	}()； //报错  这时控制台会报错，而当�
     
     <item>
       <title>Js里的继承</title>
-      <link>https://example.org/posts/js%E9%87%8C%E7%9A%84%E7%BB%A7%E6%89%BF/</link>
+      <link>https://www.nams.site/posts/js%E9%87%8C%E7%9A%84%E7%BB%A7%E6%89%BF/</link>
       <pubDate>Tue, 02 Jan 2018 16:50:08 +0800</pubDate>
       
-      <guid>https://example.org/posts/js%E9%87%8C%E7%9A%84%E7%BB%A7%E6%89%BF/</guid>
+      <guid>https://www.nams.site/posts/js%E9%87%8C%E7%9A%84%E7%BB%A7%E6%89%BF/</guid>
       <description>在其他的OO语言中，最常见的两种继承方式是接口继承和实现继承。
 我们知道，在JS中函数是没有签名的，函数的命名参数只是为了便利，并不是必须的，就算没有命名参数，我们还可以通过arguments获得传入函数的参数，就是这么随意~
 原型链 我们知道每个构造函数都有一个原型对象，原型对象又有一个指向构造函数的指针，而实例内部也有一个指向原型对象的指针，如果我们让原型对象指向另一个类型的实例，这时原型对象将包含一个指向另一个原型对象的指针，而另一个原型对象又是另一个类型的实例，如此层层递进，就形成了原型链：
@@ -63,10 +63,10 @@ function SuperType() { this.names = [&#39;Nam&#39;, &#39;Leenam&#39;, &#39;Yang&
     
     <item>
       <title>This指向</title>
-      <link>https://example.org/posts/this%E6%8C%87%E5%90%91/</link>
+      <link>https://www.nams.site/posts/this%E6%8C%87%E5%90%91/</link>
       <pubDate>Sun, 22 Oct 2017 15:15:09 +0800</pubDate>
       
-      <guid>https://example.org/posts/this%E6%8C%87%E5%90%91/</guid>
+      <guid>https://www.nams.site/posts/this%E6%8C%87%E5%90%91/</guid>
       <description>刚学JS时，总是对this的指向摸不着头脑，所以对它的使用，总是小心翼翼，能避就避，但在一些场景中，不使用this，会让代码变得丑陋。比如：
 function sayHi() { return &#39;Hello, I&#39;m &#39; + this.name; } const me = { name: &#39;Nam&#39; } sayHi.call(me); // Hello,I&#39;m Nam // 而当我们不使用this时，必须要显示的传入一个上下文对象 function sayHi(obj) { return &#39;Hello, I&#39;m &#39; + obj.name; } const me = { name: &#39;Nam&#39; } sayHi(me); // Hello,I&#39;m Nam  显然，this提供了一种更优雅的方式来隐式的传递一个对象。当我们使用的模式越来越复杂，显示的传递上下文对象会让代码变得越来越混乱，使用this就可以很好的解决这个问题。
 this的指向 关于this的指向，总有一个原则：this总是指向调用调用函数的那个对象。
@@ -76,10 +76,10 @@ this的指向 关于this的指向，总有一个原则：this总是指向调用�
     
     <item>
       <title>Js的基本类型</title>
-      <link>https://example.org/posts/js%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/</link>
+      <link>https://www.nams.site/posts/js%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/posts/js%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>https://www.nams.site/posts/js%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/</guid>
       <description>Javascript的内置类型总共有7种：
  Undefined Null String Number Boolean Symbol（ES6新增） Object  其中除了Object为引用类型外，其他都为基本类型。
 我们可以使用 typeof 操作符来检测基本类型：
