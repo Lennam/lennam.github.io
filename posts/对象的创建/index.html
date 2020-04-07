@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Nam">
+<meta name="description" content="Nam&#39;s blog">
+<meta name="generator" content="Hugo 0.59.0" />
+<title>对象的创建</title>
+<link rel="shortcut icon" href="https://www.nams.site/images/favicon.ico">
+<link rel="stylesheet" href="https://www.nams.site/css/style.css">
+<link rel="stylesheet" href="https://www.nams.site/css/highlight.css">
+
+
+
+<link rel="stylesheet" href="https://www.nams.site/css/monosocialiconsfont.css">
+
+
+
+<link href="https://www.nams.site/index.xml" rel="alternate" type="application/rss+xml" title="Nam&#39;s" />
+
+
+<meta property="og:title" content="对象的创建" />
+<meta property="og:description" content="在说面向对象前，我们先说一下对象的创建吧。
+我们知道在创建单个对象的时候，我们可以可以使用Object构造函数或者对象字面量的方式：
+// 使用Object创建对象 var person = new Object(); person.name = &#39;Nam&#39;; person.age = 18; // 使用对象字面量创建对象 var person = { name: &#39;Nam&#39;, age: 18 }  当我们需要创建许多对象的时候，这些方式会产生大量的代码。为了解决这个，人们开始运用工厂模式。
+工厂模式 众所周知，js中是无法创建类的，所以就诞生了一种函数：
+function createPerson(name) { let o = new Object(); o.name = name; o.say = function() { console.log(this.name) }; return o; } const person1 = createPerson(&#39;Nam&#39;); person1.say();  这样做创建对象倒是快了，当我们不知道这个对象是什么类型的啊：
+person1.contructor; // function Object() {...}  构造函数 由于工厂模式创建的对象都是些孤儿，所以我们创建一个类似于原生Object（）的构造函数：
+function Person(name) { this.name = name; this." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.nams.site/posts/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA/" />
+<meta property="article:published_time" content="2017-12-27T13:38:13+08:00" />
+<meta property="article:modified_time" content="2017-12-27T13:38:13+08:00" />
+
+
+<meta itemprop="name" content="对象的创建">
+<meta itemprop="description" content="在说面向对象前，我们先说一下对象的创建吧。
+我们知道在创建单个对象的时候，我们可以可以使用Object构造函数或者对象字面量的方式：
+// 使用Object创建对象 var person = new Object(); person.name = &#39;Nam&#39;; person.age = 18; // 使用对象字面量创建对象 var person = { name: &#39;Nam&#39;, age: 18 }  当我们需要创建许多对象的时候，这些方式会产生大量的代码。为了解决这个，人们开始运用工厂模式。
+工厂模式 众所周知，js中是无法创建类的，所以就诞生了一种函数：
+function createPerson(name) { let o = new Object(); o.name = name; o.say = function() { console.log(this.name) }; return o; } const person1 = createPerson(&#39;Nam&#39;); person1.say();  这样做创建对象倒是快了，当我们不知道这个对象是什么类型的啊：
+person1.contructor; // function Object() {...}  构造函数 由于工厂模式创建的对象都是些孤儿，所以我们创建一个类似于原生Object（）的构造函数：
+function Person(name) { this.name = name; this.">
+
+
+<meta itemprop="datePublished" content="2017-12-27T13:38:13&#43;08:00" />
+<meta itemprop="dateModified" content="2017-12-27T13:38:13&#43;08:00" />
+<meta itemprop="wordCount" content="332">
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="对象的创建"/>
+<meta name="twitter:description" content="在说面向对象前，我们先说一下对象的创建吧。
+我们知道在创建单个对象的时候，我们可以可以使用Object构造函数或者对象字面量的方式：
+// 使用Object创建对象 var person = new Object(); person.name = &#39;Nam&#39;; person.age = 18; // 使用对象字面量创建对象 var person = { name: &#39;Nam&#39;, age: 18 }  当我们需要创建许多对象的时候，这些方式会产生大量的代码。为了解决这个，人们开始运用工厂模式。
+工厂模式 众所周知，js中是无法创建类的，所以就诞生了一种函数：
+function createPerson(name) { let o = new Object(); o.name = name; o.say = function() { console.log(this.name) }; return o; } const person1 = createPerson(&#39;Nam&#39;); person1.say();  这样做创建对象倒是快了，当我们不知道这个对象是什么类型的啊：
+person1.contructor; // function Object() {...}  构造函数 由于工厂模式创建的对象都是些孤儿，所以我们创建一个类似于原生Object（）的构造函数：
+function Person(name) { this.name = name; this."/>
+
+
+    </head>
+<body>
+    <nav class="main-nav">
+	
+		<a href='https://www.nams.site/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+
+	
+		<a class="cta" href="https://www.nams.site/index.xml">Subscribe</a>
+	
+</nav>
+
+    <section id="wrapper">
+        
+        
+<article class="post">
+    <header>
+        <h1>对象的创建</h1>
+        <h2 class="subtitle"></h2>
+        <h2 class="headline">
+        December 27, 2017
+        <br>
+        
+        </h2>
+    </header>
+    <section id="post-body">
+        
+
+<p>在说面向对象前，我们先说一下对象的创建吧。</p>
+
+<p>我们知道在创建单个对象的时候，我们可以可以使用Object构造函数或者对象字面量的方式：</p>
+
+<pre><code class="language-javascript">//  使用Object创建对象
+var person = new Object();
+person.name = 'Nam';
+person.age = 18;
+
+//  使用对象字面量创建对象
+var person = {
+    name: 'Nam',
+    age: 18
+}
+</code></pre>
+
+<p>当我们需要创建许多对象的时候，这些方式会产生大量的代码。为了解决这个，人们开始运用工厂模式。</p>
+
+<h3 id="工厂模式">工厂模式</h3>
+
+<p>众所周知，js中是无法创建类的，所以就诞生了一种函数：</p>
+
+<pre><code class="language-javascript">function createPerson(name) {
+  let o = new Object();
+  o.name = name;
+  o.say = function() {
+     console.log(this.name)
+  };
+  return o;
+}
+
+const person1 = createPerson('Nam');
+person1.say();
+</code></pre>
+
+<p>这样做创建对象倒是快了，当我们不知道这个对象是什么类型的啊：</p>
+
+<pre><code class="language-javascript">person1.contructor;  // function Object() {...}
+</code></pre>
+
+<h3 id="构造函数">构造函数</h3>
+
+<p>由于工厂模式创建的对象都是些<del>孤儿</del>，所以我们创建一个类似于原生Object（）的构造函数：</p>
+
+<pre><code class="language-javascript">function Person(name) {
+  this.name = name;
+  this.say = function() {
+    console.log(this.name)
+  }
+}
+
+const person1 = new Person('Nam');
+console.log(person1.name);  // 'Nam'
+person1.say();  // 'Nam'
+</code></pre>
+
+<p><em>关于this,不懂的老铁可以看我的另一篇文章：this的指向</em></p>
+
+<p>在这个栗子中，我们使用new的操作符大体做了几件事：</p>
+
+<ol>
+<li>创建一个新对象</li>
+<li>将构造函数的作用域赋给新对象</li>
+<li>执行构造函数中的代码</li>
+<li>返回新对象</li>
+</ol>
+
+<p>现在，新创建的实例person1再也不是<del>孤儿</del>了，它的constructor属性指向了Person：</p>
+
+<pre><code class="language-javascript">console.log(person1.contructor);  // function Person(name) {...}
+</code></pre>
+
+<p>但是构造函数模式也有缺点，当我们创建多个实例的时候，也为每个实例创建了一个相同的函数，它们都是完成相同的功能，完全没必要创建那么多。</p>
+
+<p>所以我们可以把完成相同功能的函数提取出来：</p>
+
+<pre><code class="language-javascript">function Person(name) {
+  this.name = name;
+}
+function say() {
+  console.log(this.name);
+}
+
+const person1 = new Person('Nam');
+const person2 = new Person('Leenam');
+
+say.call(person1);  // 'Nam'
+</code></pre>
+
+<p>看起来是不错，但是新的问题又来啦！全局函数只能被某几个对象调用！更糟糕的是如果对象需要很多方法怎么办？炸了炸了。。。</p>
+
+<h3 id="原型模式">原型模式</h3>
+
+<p>我们都知道每个函数都有一个prototype属性，指向一个对象，而这个对象包含可以由特定类型的所有实例共享的属性和方法。因此，我们不必在构造函数中定义对象实例的属性和方法，而是将这些属性和方法直接添加到原型对象中：</p>
+
+<pre><code class="language-javascript">function Person() {}
+
+Person.prototype = {
+  name : 'Nam',
+  say: function() {
+    console.log(this.name);
+  }
+}
+
+const person1 = new Person();
+const person2 = new Person();
+person1.say();  // 'Nam'
+person2.say();  // 'Nam'
+</code></pre>
+
+<p>我们可以为某个实例添加和原型一样的属性名来屏蔽原型对象上的属性：</p>
+
+<pre><code class="language-javascript">person1.name = 'Leenam';
+person1.say();   // 'Leenam'
+person2.say();   // 'Nam'
+</code></pre>
+
+<p>如果创建实例后在对构造函数的原型进行声明，会使实例失去对原型的引用：</p>
+
+<pre><code class="language-javascript">function Person() {}
+
+Person.prototype = {
+  name : 'Nam',
+}
+
+const person1 = new Person();
+console.log(person1.name);  // 'Nam'
+
+Person.prototype = {
+  name: 'Leenam'
+}
+console.log(person1.name);  // 'Nam'
+</code></pre>
+
+<p>但是显而易见，原型模式的问题就是其共享的特性，在修改某个属性的时候，如果这个属性位于原型上，那么所有引用这个属性的实例在访问这个属性的时候，都会得到更改后的值，而一个实例一般都是要有属于自己的全部属性的。</p>
+
+<h3 id="组合构造函数模式和原型模式">组合构造函数模式和原型模式</h3>
+
+<p>如果我们使用构造函数模式定义实例的属性，而使用原型模式定义方法和共享的属性，就可以很好解决上述两个模式的问题，而这种混合模式也是最常见的方式：</p>
+
+<pre><code class="language-javascript">function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype = {
+  constructor: Person,
+  sayName: function() {
+    console.log(this.name)
+  }
+}
+
+const person1 = new Person('Nam', 18);
+const person2 = new Person('Leenam', 23);
+
+person1.sayName();  // 'Nam'
+person2.sayName();  // 'Leenam'
+</code></pre>
+
+<h3 id="动态原型模式">动态原型模式</h3>
+
+<p>对于有其他OO语言经验的开发人员来说，独立的构造函数和原型会让他们感到困惑。动态原型模式正式致力于解决这个问题：</p>
+
+<pre><code class="language-javascript">function Person(name) {
+  this.name = name;
+  if(!typeof this.sayName !== 'function') {
+    Person.prototype.sayName = function () {
+      console.log(this.name)
+    }
+  }
+}
+
+const person1 = new Person('Nam');
+
+person1.sayName();  // 'Nam'
+</code></pre>
+
+<p>在实例化的时候，只有在sayName不存在的情况下，才会把它添加到原型中，之后，因为原型中已经有了sayName，所以再进行实例化就不需要进行什么修改了。</p>
+
+<h3 id="寄生构造函数模式">寄生构造函数模式</h3>
+
+<p>在某些情况下，我么可能需要一种名为寄生构造函数的模式：</p>
+
+<pre><code class="language-javascript">function Person(name) {
+let o = new Object();
+o.name = 'Nam';
+o.sayName = function() {
+console.log(this.name)
+}
+return o;
+}
+
+const person1 = new Person('Nam');
+
+person1.sayName(); // 'Nam'
+</code></pre>
+
+<p>你可能会说：“这不就是工厂模式吗？”</p>
+
+<p>的确，除了使用new操作符并把使用的包装函数称为构造函数外，这个模式跟工厂模式是一摸一样的。</p>
+
+<p>这个模式可以用来在特殊的情况下为对象创建构造函数，例如我们需要具有一个额外方法的特殊数组，我们又不能直接修改数组的构造函数，就可以使用这个模式：</p>
+
+<pre><code class="language-javascript">function createNamArr(name) {
+  let namArray = new Array();
+  namArray.push.apply(namArray, arguments);
+  namArray.joinAll = function() {
+    return this.join('-')
+  };
+  return namArray;
+}
+
+const arr1 = new createNamArr('Nam','is','handsome');
+
+console.log(arr1.joinAll());  // 'Nam-is-handsome'
+</code></pre>
+
+    </section>
+</article>
+
+<footer id="post-meta" class="clearfix">
+    
+    <img class="avatar" src="https://www.nams.site/images/avatar.png">
+    <div>
+        <span class="dark">Nam</span>
+        <span>在路上</span>
+    </div>
+    
+    <section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fwww.nams.site%2fposts%2f%25E5%25AF%25B9%25E8%25B1%25A1%25E7%259A%2584%25E5%2588%259B%25E5%25BB%25BA%2f - %e5%af%b9%e8%b1%a1%e7%9a%84%e5%88%9b%e5%bb%ba "><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+    </section>
+</footer>
+
+
+
+<ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+
+    
+    
+    
+        <li>
+            <a href="https://www.nams.site/posts/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%80/">函数式编程(一)<aside class="dates">Apr 7 2019</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/how-to-use-proxy/">How to use Proxy<aside class="dates">Feb 3 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/">一道面试题<aside class="dates">Jan 10 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/js%E9%87%8C%E7%9A%84%E7%BB%A7%E6%89%BF/">Js里的继承<aside class="dates">Jan 2 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/this%E6%8C%87%E5%90%91/">This指向<aside class="dates">Oct 22 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/js%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/">Js的基本类型<aside class="dates">Jan 1 0001</aside></a>
+        </li>
+    
+</ul>
+
+
+
+        <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    
+    <a class="symbol" href="https://Lennam.github.com/">
+        circlegithub
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2020 Nam
+    
+    </p>
+</footer>
+
+    </section>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://www.nams.site/js/main.js"></script>
+<script src="https://www.nams.site/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+</body>
+</html>
