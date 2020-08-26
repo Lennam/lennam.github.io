@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Nam">
+<meta name="description" content="Nam&#39;s blog">
+<meta name="generator" content="Hugo 0.59.0" />
+<title>函数式编程(二)</title>
+<link rel="shortcut icon" href="https://www.nams.site/images/favicon.ico">
+<link rel="stylesheet" href="https://www.nams.site/css/style.css">
+<link rel="stylesheet" href="https://www.nams.site/css/highlight.css">
+
+
+
+<link rel="stylesheet" href="https://www.nams.site/css/monosocialiconsfont.css">
+
+
+
+<link href="https://www.nams.site/index.xml" rel="alternate" type="application/rss+xml" title="Nam&#39;s" />
+
+
+<meta property="og:title" content="函数式编程(二)" />
+<meta property="og:description" content="上一篇介绍了函数式编程的一些概念，接下来我会结合前端这个特定领域介绍一些函数式编程的应用。
+对于前端而言，终极的目的是生成用户UI，与过去简单的静态页面不同，如今的前端充斥着大量的状态和数据，如果我们继续命令式地操作Dom，可以想像将是一场灾难。
+而随着MVVM模式的诞生，许多框架选择把视图层抽象出来，比如React的Jsx和Vue的模版引擎，它们都为我们提供了另一种创建UI的思路：
+UI = Render(Data)
+这样我们就可以只专注于Data的编写，而把渲染的过程交给框架，而框架也可以利用这一点解耦HTML，为不同的平台提供不同的渲染器，从而促成了RN和Weex之类的库的诞生。当然，现在也无从考证是函数式思想影响了这些框架引入抽象视图层，还是框架选择抽象试图无意间和函数式编程所吻合。
+诚然，如果我们的应用越来越大，视图也会随之增多，每个组件之间势必会多出一些冗余的数据并且组件的交互也更加繁琐：
+如果我们把冗余的数据提取成单独的一层，势必会让我们的组件更加精简：
+所以一众状态管理的库也因此诞生，其中又以Redux和函数式的关系最为紧密。
+与CURD类型的状态管理库不同，redux采用了另一种思路：Event Sourcing。在这种体系下，我们只存储事件的记录，而不存储具体状态，当我们需要具体状态时，我们只要从头开始计算所有的事件即可，所以redux给我们提供了强大的状态追踪功能，我们可以方便的进行状态的时间旅行。
+对于事件来说，它只描述发生了什么，具体的应用状态，我们需要Reducer进行计算，我们可以把状态计算的过程抽象为下面的式子：
+newState = reducer(oldState, action)  每一次产生事件，redux都会根据旧的状态和事件产生出一个新的状态，让react重新渲染视图，所以整个生命周期中，状态的迭代过程如下：
+除了redux之外，还有另一个我们熟知的库：Rxjs。
+在谈Rxjs之前，我们先说说函数响应式编程（Functional Reactive Programming）。简单的说，它就是采用函数式编程的方法进行响应式编程的编程范式。
+响应式编程有以下几个特点：
+ 事件驱动 可拓展性 可伸缩性  用户界面和网络请求都是基于事件的，所以函数响应式编程特别适合于Web应用，而Rxjs则是目前使用最为广泛的库。
+在Rxjs中，把所有的事件都看成了流。作为响应式编程的核心，流的本质是一个按时间顺序排列的进行中事件的序列集合，而Rxjs提供了许多操作流的方法，让我们可以在更高的抽象维度去进行编程。比如当我们需要过滤出连续点击两次或更多事件时，在rxjs中我们可以这样操作：我们使用原生js需要大量代码才能实现的功能，在rxjs中只需要几个操作就可以完成。
+如今的软件开发已经越来越复杂，使用单一的某种思想或工具已经无法应对越来越多的难题。还是那句话，在计算机科学里没用绝对的最佳实践，我们需要对不同的问题采取不同的解决方法，而每学习一种新的思想，都会帮助我们拓宽解决问题的思路。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.nams.site/posts/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%BA%8C/" />
+<meta property="article:published_time" content="2020-04-08T20:51:49+08:00" />
+<meta property="article:modified_time" content="2020-04-08T20:51:49+08:00" />
+
+
+<meta itemprop="name" content="函数式编程(二)">
+<meta itemprop="description" content="上一篇介绍了函数式编程的一些概念，接下来我会结合前端这个特定领域介绍一些函数式编程的应用。
+对于前端而言，终极的目的是生成用户UI，与过去简单的静态页面不同，如今的前端充斥着大量的状态和数据，如果我们继续命令式地操作Dom，可以想像将是一场灾难。
+而随着MVVM模式的诞生，许多框架选择把视图层抽象出来，比如React的Jsx和Vue的模版引擎，它们都为我们提供了另一种创建UI的思路：
+UI = Render(Data)
+这样我们就可以只专注于Data的编写，而把渲染的过程交给框架，而框架也可以利用这一点解耦HTML，为不同的平台提供不同的渲染器，从而促成了RN和Weex之类的库的诞生。当然，现在也无从考证是函数式思想影响了这些框架引入抽象视图层，还是框架选择抽象试图无意间和函数式编程所吻合。
+诚然，如果我们的应用越来越大，视图也会随之增多，每个组件之间势必会多出一些冗余的数据并且组件的交互也更加繁琐：
+如果我们把冗余的数据提取成单独的一层，势必会让我们的组件更加精简：
+所以一众状态管理的库也因此诞生，其中又以Redux和函数式的关系最为紧密。
+与CURD类型的状态管理库不同，redux采用了另一种思路：Event Sourcing。在这种体系下，我们只存储事件的记录，而不存储具体状态，当我们需要具体状态时，我们只要从头开始计算所有的事件即可，所以redux给我们提供了强大的状态追踪功能，我们可以方便的进行状态的时间旅行。
+对于事件来说，它只描述发生了什么，具体的应用状态，我们需要Reducer进行计算，我们可以把状态计算的过程抽象为下面的式子：
+newState = reducer(oldState, action)  每一次产生事件，redux都会根据旧的状态和事件产生出一个新的状态，让react重新渲染视图，所以整个生命周期中，状态的迭代过程如下：
+除了redux之外，还有另一个我们熟知的库：Rxjs。
+在谈Rxjs之前，我们先说说函数响应式编程（Functional Reactive Programming）。简单的说，它就是采用函数式编程的方法进行响应式编程的编程范式。
+响应式编程有以下几个特点：
+ 事件驱动 可拓展性 可伸缩性  用户界面和网络请求都是基于事件的，所以函数响应式编程特别适合于Web应用，而Rxjs则是目前使用最为广泛的库。
+在Rxjs中，把所有的事件都看成了流。作为响应式编程的核心，流的本质是一个按时间顺序排列的进行中事件的序列集合，而Rxjs提供了许多操作流的方法，让我们可以在更高的抽象维度去进行编程。比如当我们需要过滤出连续点击两次或更多事件时，在rxjs中我们可以这样操作：我们使用原生js需要大量代码才能实现的功能，在rxjs中只需要几个操作就可以完成。
+如今的软件开发已经越来越复杂，使用单一的某种思想或工具已经无法应对越来越多的难题。还是那句话，在计算机科学里没用绝对的最佳实践，我们需要对不同的问题采取不同的解决方法，而每学习一种新的思想，都会帮助我们拓宽解决问题的思路。">
+
+
+<meta itemprop="datePublished" content="2020-04-08T20:51:49&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-08T20:51:49&#43;08:00" />
+<meta itemprop="wordCount" content="29">
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="函数式编程(二)"/>
+<meta name="twitter:description" content="上一篇介绍了函数式编程的一些概念，接下来我会结合前端这个特定领域介绍一些函数式编程的应用。
+对于前端而言，终极的目的是生成用户UI，与过去简单的静态页面不同，如今的前端充斥着大量的状态和数据，如果我们继续命令式地操作Dom，可以想像将是一场灾难。
+而随着MVVM模式的诞生，许多框架选择把视图层抽象出来，比如React的Jsx和Vue的模版引擎，它们都为我们提供了另一种创建UI的思路：
+UI = Render(Data)
+这样我们就可以只专注于Data的编写，而把渲染的过程交给框架，而框架也可以利用这一点解耦HTML，为不同的平台提供不同的渲染器，从而促成了RN和Weex之类的库的诞生。当然，现在也无从考证是函数式思想影响了这些框架引入抽象视图层，还是框架选择抽象试图无意间和函数式编程所吻合。
+诚然，如果我们的应用越来越大，视图也会随之增多，每个组件之间势必会多出一些冗余的数据并且组件的交互也更加繁琐：
+如果我们把冗余的数据提取成单独的一层，势必会让我们的组件更加精简：
+所以一众状态管理的库也因此诞生，其中又以Redux和函数式的关系最为紧密。
+与CURD类型的状态管理库不同，redux采用了另一种思路：Event Sourcing。在这种体系下，我们只存储事件的记录，而不存储具体状态，当我们需要具体状态时，我们只要从头开始计算所有的事件即可，所以redux给我们提供了强大的状态追踪功能，我们可以方便的进行状态的时间旅行。
+对于事件来说，它只描述发生了什么，具体的应用状态，我们需要Reducer进行计算，我们可以把状态计算的过程抽象为下面的式子：
+newState = reducer(oldState, action)  每一次产生事件，redux都会根据旧的状态和事件产生出一个新的状态，让react重新渲染视图，所以整个生命周期中，状态的迭代过程如下：
+除了redux之外，还有另一个我们熟知的库：Rxjs。
+在谈Rxjs之前，我们先说说函数响应式编程（Functional Reactive Programming）。简单的说，它就是采用函数式编程的方法进行响应式编程的编程范式。
+响应式编程有以下几个特点：
+ 事件驱动 可拓展性 可伸缩性  用户界面和网络请求都是基于事件的，所以函数响应式编程特别适合于Web应用，而Rxjs则是目前使用最为广泛的库。
+在Rxjs中，把所有的事件都看成了流。作为响应式编程的核心，流的本质是一个按时间顺序排列的进行中事件的序列集合，而Rxjs提供了许多操作流的方法，让我们可以在更高的抽象维度去进行编程。比如当我们需要过滤出连续点击两次或更多事件时，在rxjs中我们可以这样操作：我们使用原生js需要大量代码才能实现的功能，在rxjs中只需要几个操作就可以完成。
+如今的软件开发已经越来越复杂，使用单一的某种思想或工具已经无法应对越来越多的难题。还是那句话，在计算机科学里没用绝对的最佳实践，我们需要对不同的问题采取不同的解决方法，而每学习一种新的思想，都会帮助我们拓宽解决问题的思路。"/>
+
+
+    </head>
+<body>
+    <nav class="main-nav">
+	
+		<a href='https://www.nams.site/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+
+	
+		<a class="cta" href="https://www.nams.site/index.xml">Subscribe</a>
+	
+</nav>
+
+    <section id="wrapper">
+        
+        
+<article class="post">
+    <header>
+        <h1>函数式编程(二)</h1>
+        <h2 class="subtitle"></h2>
+        <h2 class="headline">
+        April 8, 2020
+        <br>
+        
+        </h2>
+    </header>
+    <section id="post-body">
+        <p><a href="https://www.nams.site/posts/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%80/">上一篇</a>介绍了函数式编程的一些概念，接下来我会结合前端这个特定领域介绍一些函数式编程的应用。</p>
+
+<p>对于前端而言，终极的目的是生成用户UI，与过去简单的静态页面不同，如今的前端充斥着大量的状态和数据，如果我们继续命令式地操作Dom，可以想像将是一场灾难。</p>
+
+<p>而随着MVVM模式的诞生，许多框架选择把视图层抽象出来，比如React的Jsx和Vue的模版引擎，它们都为我们提供了另一种创建UI的思路：</p>
+
+<p>UI = Render(Data)</p>
+
+<p>这样我们就可以只专注于Data的编写，而把渲染的过程交给框架，而框架也可以利用这一点解耦HTML，为不同的平台提供不同的渲染器，从而促成了RN和Weex之类的库的诞生。当然，现在也无从考证是函数式思想影响了这些框架引入抽象视图层，还是框架选择抽象试图无意间和函数式编程所吻合。</p>
+
+<hr />
+
+<p>诚然，如果我们的应用越来越大，视图也会随之增多，每个组件之间势必会多出一些冗余的数据并且组件的交互也更加繁琐：</p>
+
+<p><img src="/functional/image-20200409161257700.png" alt="image" /></p>
+
+<p>如果我们把冗余的数据提取成单独的一层，势必会让我们的组件更加精简：</p>
+
+<p><img src="/functional/image-20200409161852787.png" alt="image" /></p>
+
+<p>所以一众状态管理的库也因此诞生，其中又以Redux和函数式的关系最为紧密。</p>
+
+<p>与CURD类型的状态管理库不同，redux采用了另一种思路：Event Sourcing。在这种体系下，我们只存储事件的记录，而不存储具体状态，当我们需要具体状态时，我们只要从头开始计算所有的事件即可，所以redux给我们提供了强大的状态追踪功能，我们可以方便的进行状态的时间旅行。</p>
+
+<p>对于事件来说，它只描述发生了什么，具体的应用状态，我们需要Reducer进行计算，我们可以把状态计算的过程抽象为下面的式子：</p>
+
+<pre><code class="language-javascript">newState = reducer(oldState, action)
+</code></pre>
+
+<p>每一次产生事件，redux都会根据旧的状态和事件产生出一个新的状态，让react重新渲染视图，所以整个生命周期中，状态的迭代过程如下：</p>
+
+<p><img src="/functional/image-20200825161842601.png" alt="image" /></p>
+
+<hr />
+
+<p>除了redux之外，还有另一个我们熟知的库：Rxjs。</p>
+
+<p>在谈Rxjs之前，我们先说说函数响应式编程（Functional Reactive Programming）。简单的说，它就是采用函数式编程的方法进行响应式编程的编程范式。</p>
+
+<p>响应式编程有以下几个特点：</p>
+
+<ul>
+<li>事件驱动</li>
+<li>可拓展性</li>
+<li>可伸缩性</li>
+</ul>
+
+<p>用户界面和网络请求都是基于事件的，所以函数响应式编程特别适合于Web应用，而Rxjs则是目前使用最为广泛的库。</p>
+
+<p>在Rxjs中，把所有的事件都看成了<strong>流</strong>。作为响应式编程的核心，流的本质是一个按时间顺序排列的进行中事件的序列集合，而Rxjs提供了许多操作流的方法，让我们可以在更高的抽象维度去进行编程。比如当我们需要过滤出连续点击两次或更多事件时，在rxjs中我们可以这样操作：<img src="../../static/functional/图片 1.png" alt="" /></p>
+
+<p>我们使用原生js需要大量代码才能实现的功能，在rxjs中只需要几个操作就可以完成。</p>
+
+<hr />
+
+<p>如今的软件开发已经越来越复杂，使用单一的某种思想或工具已经无法应对越来越多的难题。还是那句话，在计算机科学里没用绝对的最佳实践，我们需要对不同的问题采取不同的解决方法，而每学习一种新的思想，都会帮助我们拓宽解决问题的思路。</p>
+
+    </section>
+</article>
+
+<footer id="post-meta" class="clearfix">
+    
+    <img class="avatar" src="https://www.nams.site/images/avatar.png">
+    <div>
+        <span class="dark">Nam</span>
+        <span>在路上</span>
+    </div>
+    
+    <section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fwww.nams.site%2fposts%2f%25E5%2587%25BD%25E6%2595%25B0%25E5%25BC%258F%25E7%25BC%2596%25E7%25A8%258B%25E4%25BA%258C%2f - %e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b%28%e4%ba%8c%29 "><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+    </section>
+</footer>
+
+
+
+<ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+
+    
+    
+    
+        <li>
+            <a href="https://www.nams.site/posts/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B8%80/">函数式编程(一)<aside class="dates">Apr 7 2019</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/how-to-use-proxy/">How to use Proxy<aside class="dates">Feb 3 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98/">一道面试题<aside class="dates">Jan 10 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/js%E9%87%8C%E7%9A%84%E7%BB%A7%E6%89%BF/">Js里的继承<aside class="dates">Jan 2 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA/">对象的创建<aside class="dates">Dec 27 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/this%E6%8C%87%E5%90%91/">This指向<aside class="dates">Oct 22 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="https://www.nams.site/posts/js%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/">Js的基本类型<aside class="dates">Jan 1 0001</aside></a>
+        </li>
+    
+</ul>
+
+
+
+        <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    
+    <a class="symbol" href="https://Lennam.github.com/">
+        circlegithub
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2020 Nam
+    
+    </p>
+</footer>
+
+    </section>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://www.nams.site/js/main.js"></script>
+<script src="https://www.nams.site/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+</body>
+</html>

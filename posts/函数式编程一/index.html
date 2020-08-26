@@ -174,7 +174,7 @@ function invertTree(node) { // 省略Tree和invert的实现 if(!node) return; re
 
 <p>编程时，我们在谈论函数的时候，总是默认它为命令式编程里的<strong>子程序。</strong></p>
 
-<p><img src="/Users/nam/Library/Application Support/typora-user-images/image-20200407142018417.png" alt="image-20200407142018417" style="zoom: 33%;" /></p>
+<p><img src="/functional/image-20200407142018417.png" alt="image" /></p>
 
 <p>子程序，英文里称为subroutine或者subprogram，顾名思义，就是指一个计算机程序中的某部分代码，它由一个或多个语句块组成它负责完成某项特定任务，而且相较于其他代码，具备相对的独立性。</p>
 
@@ -187,11 +187,11 @@ function invertTree(node) { // 省略Tree和invert的实现 if(!node) return; re
 
 <p>在数学里，我们可以把函数看作两个不为空的集合间的一种对应关系，输入值集合中的每项元素皆能对应唯一一项输出值集合中的元素。例如实数x对应到其平方x2的关系就是一个函数，若以3作为此函数的输入值，所得的输出值便是9：</p>
 
-<p><img src="/Users/nam/Library/Application Support/typora-user-images/image-20200407142331767.png" alt="image-20200407142331767" style="zoom: 33%;" /></p>
+<p><img src="/functional/image-20200407142331767.png" alt="image" /></p>
 
 <p>我们用数学式把这个关系写出来就是一个我们每个人都见过的式子：</p>
 
-<p><img src="/Users/nam/Library/Application Support/typora-user-images/image-20200407142436016.png" alt="image-20200407142436016" style="zoom: 33%;" /></p>
+<p><img src="/functional/image-20200407142436016.png" alt="image" /></p>
 
 <p>函数将有效的输入值变换为唯一的输出值，同一输入总是对应同一输出，但反之未必成立。因此如Root(x)=正负sqrt(x)这样的表达式并没有定义出一个函数，因为输出值有两个可能。定义函数时需确定每一个输入值只对应唯一输出值，因此必须明确地选择一个平方根。例如定义Posroot(x)=sqrt(x)，亦即对于任何非负输入值，选择其非负平方根作为函数值。</p>
 
@@ -203,21 +203,21 @@ function invertTree(node) { // 省略Tree和invert的实现 if(!node) return; re
 
 <p>Lambda演算的定义为：</p>
 
-<p><img src="/Users/nam/Library/Application Support/typora-user-images/image-20200407143151599.png" alt="image-20200407143151599" style="zoom: 33%;" /></p>
+<p><img src="/functional/image-20200407143151599.png" alt="image" /></p>
 
 <p>比如我们定一个lambda表达式：</p>
 
-<p><img src="/Users/nam/Library/Application Support/typora-user-images/image-20200407143314009.png" alt="image-20200407143314009" style="zoom: 33%;" /></p>
+<p><img src="/functional/image-20200407143314009.png" alt="image" /></p>
 
 <p>当这个表达式应用于具体的变量时，需要用一对括号把表达式括起来，应用过程是把变量值赋值给表达式中的x，并去掉 λ&lt;变量&gt;：</p>
 
-<p><img src="/Users/nam/Library/Application Support/typora-user-images/image-20200407143405738.png" alt="image-20200407143405738" style="zoom: 33%;" /></p>
+<p><img src="/functional/image-20200407143405738.png" alt="image" /></p>
 
 <p>看到这里是不是熟悉了很多，这其实就对应着程序语言中的<strong>函数定义，参数传递，函数调用</strong>。函数式编程语言Lisp表达的也正是这种形式。</p>
 
 <p>那如果是多个变量呢？</p>
 
-<p><img src="/Users/nam/Library/Application Support/typora-user-images/image-20200407143717049.png" alt="image-20200407143717049" style="zoom: 33%;" /></p>
+<p><img src="/functional/image-20200407143717049.png" alt="image" /></p>
 
 <p>可能有人会有疑问，如果以lambda演算为语言基础，那么语言中的boolean、number、list这些数据类型怎么办？</p>
 
@@ -229,7 +229,7 @@ function invertTree(node) { // 省略Tree和invert的实现 if(!node) return; re
 
 <p>因为其实我们是无法直观的看出一个值是true还是false，而是根据条件判断返回的值来判断，在Lambda演算中，我们可以这样定义布尔值（感兴趣的同学可以自己去搜索一下推导过程）：</p>
 
-<p><img src="/Users/nam/Library/Application Support/typora-user-images/image-20200407144303904.png" alt="image-20200407144303904" style="zoom:33%;" /></p>
+<p><img src="/functional/image-20200407144303904.png" alt="image" /></p>
 
 <p>介绍完Lambda，下面我们来定义一下函数式编程范式：</p>
 
@@ -311,6 +311,10 @@ function invertTree(node) { // 省略Tree和invert的实现 if(!node) return; re
 
     
     
+    
+        <li>
+            <a href="https://www.nams.site/posts/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%BA%8C/">函数式编程(二)<aside class="dates">Apr 8 2020</aside></a>
+        </li>
     
         <li>
             <a href="https://www.nams.site/posts/how-to-use-proxy/">How to use Proxy<aside class="dates">Feb 3 2018</aside></a>
